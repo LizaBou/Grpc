@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package hotel;
+
+service HotelService {
+    rpc CheckAvailability(AvailabilityRequest) returns (AvailabilityResponse);
+    rpc MakeReservation(ReservationRequest) returns (ReservationResponse);
+}
+
+message AvailabilityRequest {
+    string agencyId = 1;
+    string password = 2;
+    string startDate = 3;
+    string endDate = 4;
+    int32 numPersons = 5;
+}
+
+message AvailabilityResponse {
+    repeated Offer offers = 1;
+}
+
+message Offer {
+    string offerId = 1;
+    int32 numBeds = 2;
+    string date = 3;
+    double price = 4;
+    string imageUrl = 5;
+}
+
+message ReservationRequest {
+    string agencyId = 1;
+    string login = 2;
+    string password = 3;
+    string offerId = 4;
+    string customerName = 5;
+    string customerCreditCard = 6;
+}
+
+message ReservationResponse {
+    string confirmation = 1;
+    string reservationReference = 2;
+}
